@@ -14,6 +14,7 @@
 // View (HTML) Interactions
 
   $root.on('submit', function (e) {
+    // debugger
     // Make sure the form submit doesn't reload the page
     e.preventDefault();
 

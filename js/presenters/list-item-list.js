@@ -24,12 +24,21 @@
     listItems.destroy(index);
   });
 
-  /*/ DELETE THIS LINE FOR THE EXTENSION
+
   // When the user clicks the edit button, toggle the 'edit' css
   // class; the css does all the heavy lifting
   $root.on('click', ".list-item .edit", function () {
     $(this).closest('.list-item').toggleClass('edit');
   });
+
+  $root.on('click', ".list-item .save-edit", function () {
+    var $happy = $(this).closest('.list-item');
+    var index = $happy.index();
+    var name = $('.edit-name', $happy).val();
+    var category = $('.edit-category', $happy).val();
+    console.log('saving', name, category);
+    listItems.update(index,name,category);
+  })
   /**/
 
 // - - - - - - - - - -
@@ -48,6 +57,13 @@
   // deleted. We need to remove it from the page to reflect that fact
   listItems.on('destroy', function (itemIndex) {
     $('.list-item', $root).eq(itemIndex).remove();
+  });
+
+  listItems.on('update', function (updatedItem, index) {
+     $('.li-name', $root).eq(index).text(updatedItem.name);
+     $('.li-category', $root).eq(index).text(updatedItem.category);
+     $('.list-item', $root).eq(index).toggleClass('edit');
+     // $('.list-item', $root).text(updatedItem.name);
   });
 
 })();

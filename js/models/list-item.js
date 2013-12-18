@@ -8,15 +8,18 @@
     $.observable(this);
 
     this.create = function (listItem) {
-      // TODO
+      items.push(listItem);
+      this.trigger('create', listItem)
     };
 
     this.destroy = function (index) {
-      // TODO
+      items.splice(index);
+      this.trigger('destroy', index);
     };
 
-    this.update = function (index, name, priority) {
-      // TODO EXTENSION
+    this.update = function (index, name, category) {
+      items[index].name = name;
+      items[index].category = category;
       this.trigger('update', items[index], index);
     };
 
